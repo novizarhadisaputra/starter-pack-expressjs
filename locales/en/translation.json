@@ -1,0 +1,10 @@
+{
+    "200": "Success",
+    "400": "Bad Request",
+    "401": "Unauthorized",
+    "404": "Not Found",
+    "500": "Internal Server Error",
+    "Your language not support": "Your language not support.",
+    "Token must be provided": "Token must be provided.",
+    "Invalid data": "Invalid data"
+}

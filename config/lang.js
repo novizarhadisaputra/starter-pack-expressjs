@@ -1,0 +1,1 @@
+exports.languageData = ['id', 'en'];
