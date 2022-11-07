@@ -1,7 +1,7 @@
-const { allData, detailData } = require('../transformers/userTransformers');
 const { validationResult } = require('express-validator');
 const userService = require('../../services/userService');
-const responseTransformers = require('../transformers/responseTransformers');
+const { responseTransformers, userTransformers, errorTransformers } = require('../transformers');
+const { allData, detailData } = userTransformers;
 
 exports.index = async (req, res) => {
     try {
@@ -17,7 +17,7 @@ exports.store = async (req, res) => {
     try {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return responseTransformers(req, res, 400, errors.array());
+            return errorTransformers(req, res, 400, errors.array());
         }
         let models = await userService.create(req);
         let transform = allData(models);

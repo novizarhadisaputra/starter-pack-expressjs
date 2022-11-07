@@ -20,12 +20,11 @@ const i18next = require("i18next");
 const i18nextMiddleware = require("i18next-http-middleware");
 const Backend = require("i18next-node-fs-backend");
 
-
 i18next
   .use(Backend)
   .use(i18nextMiddleware.LanguageDetector).init({
     backend: {
-      loadPath: __dirname + "/locales/{{lng}}/{{ns}}.json",
+      loadPath: __dirname + "/resources/lang/{{lng}}/{{ns}}.json",
     },
     fallbackLng: ["en"],
   });
@@ -43,7 +42,7 @@ const upload = require('multer')();
 const app = express();
 
 // view engine setup;
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, '/resources/views'));
 app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
