@@ -5,18 +5,21 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
-// define routes here
+// define routes here;
 const usersRouter = require('./routes/users');
 const swaggerRouter = require('./routes/swagger');
 
+// file exception;
 const exception = require('./app/handler/exception');
+
+// file ratelimit;
 const { globalLimiter } = require('./app/libraries/rateLimiters');
+
+// library multi-language
 const i18next = require("i18next");
 const i18nextMiddleware = require("i18next-http-middleware");
 const Backend = require("i18next-node-fs-backend");
-const acceptLanguage = require('./app/http/middlewares/acceptLanguage');
-const createRequstInput = require('./app/http/middlewares/createRequstInput');
-const upload = require('multer')();
+
 
 i18next
   .use(Backend)
@@ -26,6 +29,16 @@ i18next
     },
     fallbackLng: ["en"],
   });
+
+
+// global middleware
+// - Accept Language
+const acceptLanguage = require('./app/http/middlewares/acceptLanguage');
+// - Apply property input
+const createRequstInput = require('./app/http/middlewares/createRequstInput');
+
+// library upload
+const upload = require('multer')();
 
 const app = express();
 

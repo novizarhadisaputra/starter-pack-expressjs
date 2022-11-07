@@ -7,8 +7,7 @@
 const app = require('../app');
 const debug = require('debug')('elearning-express:server');
 const http = require('http');
-const mongoose = require('mongoose');
-
+const { load: db } = require('../config/database');
 /**
  * Get port from environment and store in Express.
  */
@@ -83,15 +82,21 @@ function onError(error) {
  */
 
 function onListening() {
-  var addr = server.address();
-  var bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
+  try {
+    var addr = server.address();
+    var bind = typeof addr === 'string'
+      ? 'pipe ' + addr
+      : 'port ' + addr.port;
 
-  connection();
-  console.log(`Listening on port ${addr.port}`);
+    connection();
+    console.log(`Listening on port ${addr.port}`);
+  } catch (error) {
+    console.log('error :>> ', error.message);
+  }
+
 }
 
 async function connection() {
-  await mongoose.connect('mongodb+srv://novizarhadisaputra:m12ncBxioWC4h0Xk@elearning.nhtb7.mongodb.net/?retryWrites=true&w=majority');
+  db.mysql();
+  db.mongodb();
 }
